@@ -21,6 +21,13 @@ class BaseLocation(AbstractLocation):
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}:x={self._x};y={self._y}"
 
-    def set_location(self, location: object) -> None:
+    def set_location(self, location) -> None:
         self._x = location._x
         self._y = location._y
+
+    def add_location(self, location):
+        new_location = BaseLocation(
+            self._x + location._x,
+            self._y + location._y)
+
+        return new_location

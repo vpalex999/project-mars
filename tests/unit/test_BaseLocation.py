@@ -40,3 +40,19 @@ def test_set_position(base_location):
     base_location.set_location(expected_location)
 
     assert base_location == expected_location
+
+
+@pytest.mark.parametrize(["step_point", "expected_point"], [
+    ((0, 1), (0, 1)),
+    ((1, 0), (1, 0)),
+    ((0, -1), (0, -1)),
+    ((-1, 0), (-1, 0)),
+])
+def test_add_location(base_location: BaseLocation, step_point, expected_point):
+
+    step_location = BaseLocation(*step_point)
+    expected_location = BaseLocation(*expected_point)
+
+    new_lacation = base_location.add_location(step_location)
+
+    assert new_lacation == expected_location
