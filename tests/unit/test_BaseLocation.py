@@ -3,14 +3,6 @@ import pytest
 from src.locations import BaseLocation
 
 
-class BaseDirection:
-    pass
-
-
-class BasePoint:
-    pass
-
-
 @pytest.fixture
 def base_location():
     return BaseLocation()
