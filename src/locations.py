@@ -25,7 +25,7 @@ class BaseLocation(AbstractLocation):
         self._x = location._x
         self._y = location._y
 
-    def add_location(self, location):
+    def join(self, location):
         new_location = BaseLocation(
             self._x + location._x,
             self._y + location._y)

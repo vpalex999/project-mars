@@ -1,4 +1,3 @@
-from unittest.mock import Mock
 
 import pytest
 
@@ -8,13 +7,8 @@ from src.locations import BaseLocation
 
 
 @pytest.fixture
-def fake_map():
-    return Mock()
-
-
-@pytest.fixture
-def base_robot(fake_map):
-    return BaseRobot(fake_map)
+def base_robot():
+    return BaseRobot()
 
 
 @pytest.fixture
@@ -27,7 +21,7 @@ def test_init_BaseRobot(base_robot):
     assert isinstance(base_robot, BaseRobot)
 
 
-def test_robot_start_position(base_robot):
+def test_robot_start_position_to_NORTH(base_robot):
     expected_location = BaseLocation()
 
     assert base_robot._location == expected_location
@@ -43,13 +37,8 @@ def test_robot_turn_left_or_right(base_robot, turn_func, expected_direction):
     assert base_robot._direction.current == expected_direction
 
 
-def test_robot_forward_to_North_by_default(base_robot: BaseRobot):
-    base_robot.forward()
-
-    assert base_robot._location == BaseLocation(x=0, y=1)
-
-
 @pytest.mark.parametrize(["func_turn", "expected_point", "desc"], [
+    (lambda robot: robot.forward(), (0, 1), "NORTH and forward"),
     (lambda robot: robot.turn_left().forward(), (-1, 0), "LEFT WEST and forward"),
     (lambda robot: robot.turn_left().turn_left().forward(),
      (0, -1), "LEFT SOUTH and forward"),
